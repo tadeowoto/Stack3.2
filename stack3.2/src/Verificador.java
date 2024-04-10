@@ -2,15 +2,11 @@
 
 public class Verificador {
     
-    private Pila p1,p2;
-    private char[] aperturas = {'{','[','(','<'};
-    private char[] cierres = {'}',']',')','>'};
-    
-    
-    public Verificador(Pila p1) {
-        this.p1 = p1;
-    }
-    
+    private char[] prueba1 = {'{','[','(','<','}',']',')','>'};
+    private char[] prueba2 = {'{','[','(','a','[','b',')','*','c',']','-','(','d','+','e',')','}'};
+    private Pila p1 = new Pila(prueba2,17);
+    private char lpm[] = {'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a'};
+    private Pila p2 = new Pila(lpm,17);
    
 //Verificación de equilibrio de paréntesis
 //Diseña un programa que tome una cadena de texto que puede contener
@@ -48,7 +44,10 @@ public class Verificador {
     
     public void pasaje(){
     
+       
+        
         while (!p1.pilaVacia()) {
+            
             if (esApertura(p1.verElemento())) {
                 p2.push(p1.verElemento());
                 p1.pop();
@@ -63,9 +62,14 @@ public class Verificador {
             }else{
                 p1.pop();
             }
+            
         }
         
-        
+         if(p2.pilaVacia()){
+             System.out.println("Esta equilobrado");
+        }else{
+             System.out.println("No esta equilibrado");
+         }
         
     }
 
