@@ -5,21 +5,19 @@ public class Pila {
     private int tope;
     private int tam;
 
-    public Pila(char[] pilita, int tam) {
-        this.pilita = pilita;
-        this.tope = -1;
+    public Pila(int tam) {
         this.tam = tam;
+        pilita= new char[tam];
+        tope=-1;
     }
 
-
-    
     // TODO
     //Metodo pilaLLena, verifica si la pila esta llena :)
     
     
     public boolean pilaLLena(){
         
-        if (tam==tope) {
+        if (tam-1==tope) {
             return true;
         }else{
             return false;

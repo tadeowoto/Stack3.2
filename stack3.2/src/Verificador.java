@@ -3,11 +3,14 @@
 public class Verificador {
     
     private char[] prueba1 = {'{','[','(','<','}',']',')','>'};
-    private char[] prueba2 = {'{','[','(','a','[','b',')','*','c',']','-','(','d','+','e',')','}'};
-    private Pila p1 = new Pila(prueba2,17);
-    private char lpm[] = {'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a'};
-    private Pila p2 = new Pila(lpm,17);
+    private char[] prueba2 = {'{','[','(','a','+','b',')','*','c',']','-','(','d','+','e',')','}'};
+    private char[] pruebaInvertida = {'}',')','e','+','d','(','-',']','c','*',')','b','+','a','(','[','{'};
+    private char[] prueba3={')',']', '(', '['};
    
+    char lpm[]= new char[17];
+    Pila p2 = new Pila(17);
+    private Pila p1 = new Pila(17);
+    
 //Verificación de equilibrio de paréntesis
 //Diseña un programa que tome una cadena de texto que puede contener
 //varios tipos de paréntesis, incluyendo (), {}, [], y <> y determine si los
@@ -43,16 +46,16 @@ public class Verificador {
     }
     
     public void pasaje(){
-    
-       
+       llenarPilas();
+       int i=0;
         
         while (!p1.pilaVacia()) {
             
-            if (esApertura(p1.verElemento())) {
+            if (esCierre(p1.verElemento())) {
                 p2.push(p1.verElemento());
                 p1.pop();
-            }else if(esCierre(p1.verElemento())){
-                if (esContrario(p1.verElemento(),p2.verElemento())) {
+            }else if(esApertura(p1.verElemento())){
+                if (esContrario(p2.verElemento(),p1.verElemento())) {
                     p2.pop();
                     p1.pop();
                 }else{
@@ -62,15 +65,31 @@ public class Verificador {
             }else{
                 p1.pop();
             }
+            System.out.println("PASADA NUMERO " +i);
+            System.out.println("PILA 1");
+            p1.mostrarPila();
+            System.out.println("PILA 2");
+            p2.mostrarPila();
+           
             
         }
         
          if(p2.pilaVacia()){
-             System.out.println("Esta equilobrado");
+             System.out.println("Esta equilibrado");
         }else{
              System.out.println("No esta equilibrado");
          }
         
+    }
+    
+    public void llenarPilas(){
+         
+       int i=0;
+         while(!p1.pilaLLena()){
+            p1.push(prueba2[i]);
+            i++;
+        }
+    
     }
 
 }
